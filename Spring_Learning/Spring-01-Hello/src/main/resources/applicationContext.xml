@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 一个bean是一个对象而不是一个类对吧？？？-->
+    <bean id="user1" class="com.lxl.domin.User">
+        <property name="name" value="龙哥"/>
+        <property name="addr" value="湖南"/>
+    </bean>
+
+    <bean id="user2" class="com.lxl.domin.User">
+        <property name="name" value="XYYS"/>
+        <property name="addr" value="北京"/>
+    </bean>
+
+    <!--它的scope本来默认的就是singleton，即只会有唯一一份在容器中    -->
+    <!--如果是singleton，在加载配置文件的时候就会创建Bean-->
+    <!--如果是prototype，要等到app.getBean的时候才会才会创建Bean-->
+    <bean id="userDao" class="com.lxl.dao.impl.UserDaoImpl" init-method="init" destroy-method="destroy">
+        <property name="username" value="龙潇岚"/>
+        <property name="age" value="20"/>
+
+        <!--通过set方法再userDao中注入了stringList对象-->
+        <property name="stringList">
+            <list>
+                <value>aaa</value>
+                <value>"bbb"</value>
+                <value>\"ccc\"</value>
+            </list>
+        </property>
+
+        <property name="userMap">
+            <map>
+                <entry key="U1" value-ref="user1"/>
+                <entry key="U2" value-ref="user2"/>
+            </map>
+        </property>
+
+        <property name="properties">
+            <props>
+                <prop key="p1">ppp1</prop>
+                <prop key="p2">ppp2</prop>
+            </props>
+        </property>
+
+    </bean>
+
+    <!--&lt;!&ndash;这是通过set方法将UserDao注入到UserService&ndash;&gt;-->
+    <!--<bean id="UserService" class="com.lxl.service.impl.UserServiceImpl">-->
+    <!--&lt;!&ndash;这里的name要用的是set方法后边再把首字母小写的名字，这个ref就是前面的id了&ndash;&gt;-->
+    <!--    <property name="userDao" ref="UserDao"></property>-->
+    <!--</bean>-->
+
+
+    <bean id="userService" class="com.lxl.service.impl.UserServiceImpl">
+        <constructor-arg name="userDao" ref="userDao"/>
+    </bean>
+
+</beans>
