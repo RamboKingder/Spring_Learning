@@ -4,12 +4,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- 一个bean是一个对象而不是一个类对吧？？？-->
-    <bean id="user1" class="com.lxl.domin.User">
+    <bean id="user1" class="com.lxl.domain.User">
         <property name="name" value="龙哥"/>
         <property name="addr" value="湖南"/>
     </bean>
 
-    <bean id="user2" class="com.lxl.domin.User">
+    <bean id="user2" class="com.lxl.domain.User">
         <property name="name" value="XYYS"/>
         <property name="addr" value="北京"/>
     </bean>
@@ -46,13 +46,14 @@
 
     </bean>
 
-    <!--&lt;!&ndash;这是通过set方法将UserDao注入到UserService&ndash;&gt;-->
-    <!--<bean id="UserService" class="com.lxl.service.impl.UserServiceImpl">-->
+    <!--这是通过set方法将userDao注入到UserService中-->
+    <!--<bean id="userService" class="com.lxl.service.impl.UserServiceImpl">-->
     <!--&lt;!&ndash;这里的name要用的是set方法后边再把首字母小写的名字，这个ref就是前面的id了&ndash;&gt;-->
-    <!--    <property name="userDao" ref="UserDao"></property>-->
+    <!--    <property name="userDao" ref="userDao"/>-->
     <!--</bean>-->
 
 
+    <!--这是通过有参构造器的方法将userDao对象注入到UserService中-->
     <bean id="userService" class="com.lxl.service.impl.UserServiceImpl">
         <constructor-arg name="userDao" ref="userDao"/>
     </bean>

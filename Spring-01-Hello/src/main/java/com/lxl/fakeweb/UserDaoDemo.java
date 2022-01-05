@@ -1,22 +1,14 @@
-package com.lxl.test;
+package com.lxl.fakeweb;
 
 import com.lxl.dao.UserDao;
-import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class SpringTest {
-
-    @Test
-    // 测试scope属性
-    public void test(){
+public class UserDaoDemo {
+    public static void main(String[] args) {
         ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
         // id是"UserDao"而已，实际上拿到的是UserDaoImpl类，然后将用UserDao接口引用来使用它
-        UserDao userDao1 = (UserDao) app.getBean("userDao");
-
-        // hashCode()其实就是@后面的十六进制转成10进制后的值
-        System.out.println(userDao1);
-
-
+        UserDao userDao = (UserDao) app.getBean(UserDao.class);
+        userDao.save();
     }
 }

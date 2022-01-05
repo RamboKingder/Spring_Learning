@@ -1,7 +1,7 @@
 package com.lxl.dao.impl;
 
 import com.lxl.dao.UserDao;
-import com.lxl.domin.User;
+import com.lxl.domain.User;
 
 import java.util.List;
 import java.util.Map;
@@ -52,6 +52,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void save() {
+        System.out.println("UserDaoImpl对象的save()在这里被调用了：");
         System.out.println("=======================================");
         System.out.println("stringList=" + stringList);
         System.out.println("userMap=" + userMap);
