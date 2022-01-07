@@ -10,5 +10,3 @@ ServletContextListener会监听servletContext对象的创建
 其实上述功能Spring框架已经替我们封装好了
 只需呀导入spring-web坐标即可
 但还是得在web.xml中去配置这个Spring官方写好的监听器
-
-### 2.SpringMVC
