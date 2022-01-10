@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!--目标对象-->
+    <bean id="target" class="com.lxl.aop.Target"/>
+
+    <!--切面对象-->
+    <bean id="myAspect" class="com.lxl.aop.MyAspect"/>
+
+    <!--配置织入关系：告诉Spring，哪些切点（目标方法）需要进行哪些增强（前置、后置等等...）-->
+    <aop:config>
+        <!--声明切面-->
+        <aop:aspect ref="myAspect">
+            <!--切面=增强+切点-->
+            <!--<aop:before method="beforeEnhance" pointcut="execution( * com.lxl.aop.Target.*(..))"/>-->
+            <!--<aop:after-returning method="afterReturningEnhance" pointcut="execution( * com.lxl.aop.Target.*(..))"/>-->
+            <!--<aop:after method="afterEnhance" pointcut="execution( * com.lxl.aop.Target.*(..))"/>-->
+            <!--<aop:around method="aroundEnhance" pointcut="execution( * com.lxl.aop.Target.*(..))"/>-->
+            <!--<aop:after-throwing method="throwingEnhance" pointcut="execution( * com.lxl.aop.Target.*(..))"/>-->
+
+            <!--抽取切点表达式-->
+            <aop:pointcut id="myPointcut" expression="execution( * com.lxl.aop.Target.*(..))"/>
+            <aop:before method="beforeEnhance" pointcut-ref="myPointcut"/>
+            <aop:after-returning method="afterReturningEnhance" pointcut-ref="myPointcut"/>
+            <aop:after method="afterEnhance" pointcut-ref="myPointcut"/>
+            <aop:around method="aroundEnhance" pointcut-ref="myPointcut"/>
+            <aop:after-throwing method="throwingEnhance" pointcut-ref="myPointcut"/>
+
+        </aop:aspect>
+    </aop:config>
+
+</beans>
